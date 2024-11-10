@@ -123,7 +123,7 @@ async (req,res)=>{
 
         // Prepara la consulta SQL según la disponibilidad de prod_imagen
         let query, values;
-        if (prod_imagen) {
+        if (newProd_imagen) {
             // Si hay imagen nueva, incluimos prod_imagen en la consulta
             query = 'UPDATE productos SET prod_codigo=?, prod_nombre=?, prod_stock=?, prod_precio=?, prod_activo=?, prod_imagen=? WHERE prod_id=?';
             values = [prod_codigo, prod_nombre, prod_stock, prod_precio, prod_activo, newProd_imagen, id];
@@ -137,7 +137,7 @@ async (req,res)=>{
         const [result] = await conmysql.query(query, values);                                 //------------------Hasta aqui se puso esto nuevo
 
         // Log de datos para confirmar los datos que se enviarán en la consulta
-        console.log("Datos para actualizar en la base de datos:", { prod_codigo, prod_nombre, prod_stock, prod_precio, prod_activo, prod_imagen, });
+        console.log("Datos para actualizar en la base de datos:", { prod_codigo, prod_nombre, prod_stock, prod_precio, prod_activo, newProd_imagen, });
         
         //console.log(cli_nombre)
         /* const [result]=await conmysql.query('update productos set prod_codigo=?, prod_nombre=?, prod_stock=?, prod_precio=?, prod_activo=?, prod_imagen=? where prod_id=?',
