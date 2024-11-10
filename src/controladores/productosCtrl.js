@@ -103,7 +103,8 @@ async (req,res)=>{
             prod_imagen = `/uploads/${req.file.filename}`;
         } */
 
-        let newProd_imagen = prod_imagen; // Si ya se pasó una URL de imagen, la usaremos
+        // Declarar `newProd_imagen` y asignarlo al valor actual o `null`
+        let newProd_imagen = null;
 
         // Verificar si se subió una nueva imagen
         if (req.file) {
@@ -115,6 +116,9 @@ async (req,res)=>{
 
             // Obtener la URL segura de la imagen subida
             newProd_imagen = uploadResult.secure_url;
+        } else if (req.body.prod_imagen) {
+            // Usar la URL de la imagen existente si no hay una nueva imagen subida
+            newProd_imagen = req.body.prod_imagen;
         }
 
         // Prepara la consulta SQL según la disponibilidad de prod_imagen
@@ -122,7 +126,7 @@ async (req,res)=>{
         if (prod_imagen) {
             // Si hay imagen nueva, incluimos prod_imagen en la consulta
             query = 'UPDATE productos SET prod_codigo=?, prod_nombre=?, prod_stock=?, prod_precio=?, prod_activo=?, prod_imagen=? WHERE prod_id=?';
-            values = [prod_codigo, prod_nombre, prod_stock, prod_precio, prod_activo, prod_imagen, id];
+            values = [prod_codigo, prod_nombre, prod_stock, prod_precio, prod_activo, newProd_imagen, id];
         } else {
             // Si no hay imagen nueva, omitimos prod_imagen de la consulta
             query = 'UPDATE productos SET prod_codigo=?, prod_nombre=?, prod_stock=?, prod_precio=?, prod_activo=? WHERE prod_id=?';
