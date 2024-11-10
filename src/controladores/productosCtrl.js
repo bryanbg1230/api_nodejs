@@ -69,9 +69,16 @@ async (req,res)=>{
         const [rows]=await conmysql.query('insert into productos (prod_codigo, prod_nombre, prod_stock, prod_precio, prod_activo, prod_imagen) values(?,?,?,?,?,?)',
             [prod_codigo, prod_nombre, prod_stock, prod_precio, prod_activo, prod_imagen])
 
-        res.send({
+        /* res.send({
             id:rows.insertId
-        })
+        }) */
+
+        // Responder con el id del producto insertado
+        res.status(201).json({
+            mensaje: 'Producto guardado correctamente.',
+            prod_id: rows.insertId,
+            prod_imagen: prod_imagen // Se incluye la URL de la imagen (si existe)
+        });
     } catch (error) {
         console.log("Error en postProducto:", error);
         return res.status(500).json({message:'error del lado del servidor'})
