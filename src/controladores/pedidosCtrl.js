@@ -33,7 +33,8 @@ async (req,res)=>{
             [cli_id, ped_fecha, usr_id, ped_estado])
 
         res.send({
-            id:rows.insertId
+            //id:rows.insertId
+           res.send({ ped_id }); // Envía el ID para usarlo en el detalle del pedido 
         })
     } catch (error) {
         return res.status(500).json({message:'error del lado del servidor'})
