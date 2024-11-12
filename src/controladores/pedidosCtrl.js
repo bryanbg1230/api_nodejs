@@ -32,11 +32,12 @@ async (req,res)=>{
         const [rows]=await conmysql.query('insert into pedidos (cli_id, ped_fecha, usr_id, ped_estado) values(?,?,?,?)',
             [cli_id, ped_fecha, usr_id, ped_estado])
 
+        const ped_id = rows.insertId; // Obtén el ped_id generado
+        console.log("Pedido creado con ID:", ped_id); // Confirma que el pedido se creó y muestra su ID
+
         res.send({
             //id:rows.insertId
-            const ped_id = rows[0].insertId; // Obtén el ped_id generado
-            console.log("Pedido creado con ID:", ped_id); // Confirma que el pedido se creó y muestra su ID
-            res.send({ ped_id }); // Envía el ID para usarlo en el detalle del pedido         
+            ped_id // Envía el ID para usarlo en el detalle del pedido         
         })
     } catch (error) {
         console.error("Error en postPedido:", error); // Muestra detalles si ocurre un error
