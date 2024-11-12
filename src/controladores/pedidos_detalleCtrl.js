@@ -26,16 +26,18 @@ async (req,res)=>{
 export const postPedido_Detalle=
 async (req,res)=>{
     try {
-        //console.log(req.body)
+        console.log("Datos recibidos en postPedido_Detalle:", req.body); // Muestra los datos de los detalles del pedido
         const {prod_id, ped_id, det_cantidad, det_precio}=req.body
         //console.log(cli_nombre)
         const [rows]=await conmysql.query('insert into pedidos_detalle (prod_id, ped_id, det_cantidad, det_precio) values(?,?,?,?)',
             [prod_id, ped_id, det_cantidad, det_precio])
 
+        console.log("Detalle de pedido creado con ID:", rows.insertId); // Confirma que el detalle se creó y muestra su ID
         res.send({
             id:rows.insertId
         })
     } catch (error) {
+        console.error("Error en postPedido_Detalle:", error); // Muestra el error si algo sale mal
         return res.status(500).json({message:'error del lado del servidor'})
     }
 }
