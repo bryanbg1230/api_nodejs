@@ -34,7 +34,7 @@ async (req,res)=>{
 
         res.send({
             //id:rows.insertId
-            const ped_id = rows.insertId; // Obtén el ped_id generado
+            const ped_id = rows[0].insertId; // Obtén el ped_id generado
             console.log("Pedido creado con ID:", ped_id); // Confirma que el pedido se creó y muestra su ID
             res.send({ ped_id }); // Envía el ID para usarlo en el detalle del pedido         
         })
