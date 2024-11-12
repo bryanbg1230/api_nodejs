@@ -26,7 +26,7 @@ async (req,res)=>{
 export const postPedido=
 async (req,res)=>{
     try {
-        //console.log(req.body)
+        console.log("Datos recibidos en postPedido:", req.body); // Verifica los datos enviados desde el frontend
         const {cli_id, ped_fecha, usr_id, ped_estado}=req.body
         //console.log(cli_nombre)
         const [rows]=await conmysql.query('insert into pedidos (cli_id, ped_fecha, usr_id, ped_estado) values(?,?,?,?)',
@@ -34,9 +34,12 @@ async (req,res)=>{
 
         res.send({
             //id:rows.insertId
-           res.send({ ped_id }); // Envía el ID para usarlo en el detalle del pedido 
+            const ped_id = rows.insertId; // Obtén el ped_id generado
+            console.log("Pedido creado con ID:", ped_id); // Confirma que el pedido se creó y muestra su ID
+            res.send({ ped_id }); // Envía el ID para usarlo en el detalle del pedido         
         })
     } catch (error) {
+        console.error("Error en postPedido:", error); // Muestra detalles si ocurre un error
         return res.status(500).json({message:'error del lado del servidor'})
     }
 }
