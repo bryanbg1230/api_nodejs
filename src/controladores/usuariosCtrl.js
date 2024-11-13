@@ -17,13 +17,19 @@ export const getUsuarios=
 export const getusuariosxid=
 async (req,res)=>{
     try {
+        // Log para ver el id recibido en la solicitud
+        console.log('ID recibido para obtener usuario:', req.params.id);
         const[result]=await conmysql.query('select * from usuarios where usr_id=?',[req.params.id])
+        // Log para verificar el resultado de la consulta
+        console.log('Resultado de la consulta:', result);
         if (result.length<=0)return res.status(404).json({
             cli_id:0,
             message:"Usuario no encontrado"
         })
         res.json(result[0])
     } catch (error) {
+        // Log para ver el error de la base de datos
+        console.error('Error al obtener usuario:', error);
         return res.status(500).json({message:'error de lado del servidor'})        
     }
 }
