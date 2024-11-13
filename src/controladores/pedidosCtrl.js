@@ -100,7 +100,8 @@ async(req,res)=>{
             id:0,
             message: "No pudo eliminar el pedido"
         })
-        res.sendStatus(202)
+        //res.sendStatus(202)
+        res.json({ message: "Pedido eliminado correctamente", ped_id: req.params.id });
     } catch (error) {
         return res.status(500).json({message:"Error del lado del servidor"})
     }
