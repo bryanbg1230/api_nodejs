@@ -6,8 +6,8 @@ const router=Router()
 
 router.post('/login', loginUsuario); // Ruta de autenticación
 
-router.get('/usuarios', verificarToken, getUsuarios)  //select
-router.get('/usuarios/:id', verificarToken, getusuariosxid)  //select x id
+router.get('/usuarios', getUsuarios)  //select
+router.get('/usuarios/:id', getusuariosxid)  //select x id
 router.post('/usuarios', verificarToken, postUsuario)  //insert
 router.put('/usuarios/:id', verificarToken, putUsuario)  //update
 router.patch('/usuarios/:id', verificarToken, patchUsuario)  //update
