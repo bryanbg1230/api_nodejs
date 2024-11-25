@@ -25,7 +25,7 @@ async (req,res)=>{
 
 export const getPedidosResumen = async (req, res) => {
     try {
-        const userId = req.userId;
+        const usr_id = req.user.id; // ID del usuario autenticado
 
         const [result] = await conmysql.query(`
             SELECT 
@@ -38,7 +38,7 @@ export const getPedidosResumen = async (req, res) => {
             INNER JOIN clientes c ON p.cli_id = c.cli_id
             INNER JOIN usuarios u ON p.usr_id = u.usr_id
             WHERE u.usr_id = ?
-        `, [userId]);
+        `, [usr_id]);
 
         res.json(result);
     } catch (error) {
