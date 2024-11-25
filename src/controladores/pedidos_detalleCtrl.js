@@ -25,7 +25,10 @@ async (req,res)=>{
 
 export const getPedidosResumen = async (req, res) => {
     try {
-        const usr_id = req.user.id; // ID del usuario autenticado
+        const usr_id = req.user?.id; // Asegúrate de que `req.user` existe
+        if (!usr_id) {
+            return res.status(400).json({ message: 'Usuario no autenticado' });
+        }
 
         const [result] = await conmysql.query(`
             SELECT 
@@ -42,7 +45,7 @@ export const getPedidosResumen = async (req, res) => {
 
         res.json(result);
     } catch (error) {
-        console.error(error);
+        console.error('Error en getPedidosResumen:', error.message);
         res.status(500).json({ message: 'Error al obtener el resumen de pedidos' });
     }
 };
