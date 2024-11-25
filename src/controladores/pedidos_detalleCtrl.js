@@ -23,6 +23,30 @@ async (req,res)=>{
     }
 }
 
+export const getPedidosResumen = async (req, res) => {
+    try {
+        const userId = req.userId;
+
+        const [result] = await conmysql.query(`
+            SELECT 
+                p.ped_id,
+                p.ped_fecha,
+                CASE WHEN p.ped_estado = 1 THEN 'Activo' ELSE 'Inactivo' END AS ped_estado_texto,
+                c.cli_nombre,
+                u.usr_nombre
+            FROM pedidos p
+            INNER JOIN clientes c ON p.cli_id = c.cli_id
+            INNER JOIN usuarios u ON p.usr_id = u.usr_id
+            WHERE u.usr_id = ?
+        `, [userId]);
+
+        res.json(result);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Error al obtener el resumen de pedidos' });
+    }
+};
+
 export const postPedido_Detalle=
 async (req,res)=>{
     try {
