@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { getPedidos_Detalle, getpedidos_detallexid, postPedido_Detalle, putPedido_Detalle, patchPedido_Detalle, deletePedido_Detalle } from "../controladores/pedidos_detalleCtrl.js"
-import { verificarToken } from "../middlewares/verificarToken.js";
+import { verificarToken } from "../middlewares/authJWT.js";
 
 const router=Router()
 
