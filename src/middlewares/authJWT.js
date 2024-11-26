@@ -1,4 +1,4 @@
-/* import jwt from 'jsonwebtoken';
+import jwt from 'jsonwebtoken';
 import { JWT_SECRET } from '../config.js';
 
 export const verificarToken = (req, res, next) => {
@@ -20,10 +20,10 @@ export const verificarToken = (req, res, next) => {
         //req.user = { id: decoded.id }; // Asegúrate de que aquí esté el ID del usuario
         next();
     });
-}; */
+};
 
 // middlewares/authJWT.js
-import jwt from 'jsonwebtoken';
+/* import jwt from 'jsonwebtoken';
 import { JWT_SECRET } from '../config.js'; // Asegúrate de que JWT_SECRET está correctamente importado
 
 export const verificarToken = (req, res, next) => {
@@ -49,4 +49,4 @@ export const verificarToken = (req, res, next) => {
     console.log('Usuario autenticado:', req.user);
     next();
   });
-};
+}; */
