@@ -11,7 +11,7 @@ export const verificarToken = (req, res, next) => {
         return res.status(401).json({ message: 'Fallo en la autenticación del token' });    //(SA)
     }    //(SA)
 
-    jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
+    jwt.verify(token, JWT_SECRET, (err, decoded) => {
         if (err) {
             console.error('Error al verificar el token:', err); // Agrega esto para depuración
             return res.status(500).json({ message: 'Fallo en la autenticación del token' });
