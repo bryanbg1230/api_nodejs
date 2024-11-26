@@ -11,6 +11,6 @@ router.post('/pedidos_detalle',postPedido_Detalle)  //insert
 router.put('/pedidos_detalle/:id',putPedido_Detalle)  //update
 router.patch('/pedidos_detalle/:id',patchPedido_Detalle)  //update
 router.delete('/pedidos_detalle/:id',deletePedido_Detalle)  //delete
-router.delete('/pedidos/:id', verificarToken, deletePedidoPorPedidoID); //delete xd id pedido
+router.delete('/pedidos_detallecompleto/:id', verificarToken, deletePedidoPorPedidoID); //delete xd id pedido
 
 export default router
