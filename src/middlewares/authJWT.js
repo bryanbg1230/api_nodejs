@@ -16,8 +16,8 @@ export const verificarToken = (req, res, next) => {
             console.error('Error al verificar el token:', err); // Agrega esto para depuración
             return res.status(500).json({ message: 'Fallo en la autenticación del token' });
         }
-        req.user = decoded;  //VALE CON LA APP
-        //req.user = { id: decoded.id }; // Asegúrate de que aquí esté el ID del usuario  //VALE CON LA APP
+        //req.user = decoded;  //VALE CON LA APP
+        req.user = { id: decoded.id }; // Asegúrate de que aquí esté el ID del usuario  //VALE CON LA APP
         next();
     });
 };
