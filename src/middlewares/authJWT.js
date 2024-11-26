@@ -28,7 +28,7 @@ import { JWT_SECRET } from '../config.js'; // Asegúrate de que JWT_SECRET está
 
 export const verificarToken = (req, res, next) => {
   const authHeader = req.headers['authorization'];
-  console.log('Authorization header:', authHeader); // Depuración
+  console.log('Encabezado Authorization recibido:', authHeader); // Depuración
 
   if (!authHeader || !authHeader.startsWith('Bearer ')) {
     return res.status(401).json({ message: 'Fallo en la autenticación del token' });
