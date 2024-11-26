@@ -129,3 +129,33 @@ async(req,res)=>{
         return res.status(500).json({message:"Error del lado del servidor"})
     }
 }
+
+export const deletePedidoPorPedidoID = async (req, res) => {
+    try {
+        const { id } = req.params; // Aquí recibiremos el ped_id
+        // Eliminamos primero los detalles del pedido
+        const [detalles] = await conmysql.query(
+            'DELETE FROM pedidos_detalle WHERE ped_id = ?',
+            [id]
+        );
+
+        if (detalles.affectedRows === 0) {
+            return res.status(404).json({ message: "No se encontraron detalles del pedido para eliminar" });
+        }
+
+        // Luego eliminamos el pedido en sí
+        const [pedido] = await conmysql.query(
+            'DELETE FROM pedidos WHERE ped_id = ?',
+            [id]
+        );
+
+        if (pedido.affectedRows === 0) {
+            return res.status(404).json({ message: "Pedido no encontrado para eliminar" });
+        }
+
+        res.sendStatus(202); // Eliminación exitosa
+    } catch (error) {
+        console.error("Error en deletePedidoPorPedidoID:", error);
+        res.status(500).json({ message: "Error del lado del servidor" });
+    }
+};
