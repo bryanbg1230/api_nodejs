@@ -2,8 +2,8 @@ import jwt from 'jsonwebtoken';
 import { JWT_SECRET } from '../config.js';
 
 export const verificarToken = (req, res, next) => {
-    //const token = req.headers['authorization'];
-    const token = req.headers['authorization']?.split(' ')[1]; // Divide 'Bearer token'
+    const token = req.headers['authorization'];
+    //const token = req.headers['authorization']?.split(' ')[1]; // Divide 'Bearer token'
     console.log('Authorization header:', token); // Depuración (SA)
     if (!token) return res.status(403).json({ message: 'Token no provisto' });
 
