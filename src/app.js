@@ -14,8 +14,8 @@ const __dirname = path.dirname(__filename);
 
 const app=express();
 const corsOptions={
-    origin:'*',//la direccion ip/dominio del servidor
-    methods:['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
+    origin:'http://localhost:8100',//la direccion ip/dominio del servidor     Se cambió de * a http://localhost:8100
+    methods:['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],  //Se agregó 'OPTIONS'
     allowedHeaders: ['Authorization', 'Content-Type'], // Incluye 'Authorization'   (SA)
     credentials:true
 }
