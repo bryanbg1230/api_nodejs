@@ -1,4 +1,4 @@
-import jwt from 'jsonwebtoken';
+/* import jwt from 'jsonwebtoken';
 import { JWT_SECRET } from '../config.js';
 
 export const verificarToken = (req, res, next) => {
@@ -7,9 +7,9 @@ export const verificarToken = (req, res, next) => {
     console.log('Authorization header:', token); // Depuración (SA)
     if (!token) return res.status(403).json({ message: 'Token no provisto' });
 
-    /* if (!token || !token.startsWith('Bearer ')) {    //(SA)        -------> Si descomento esto cuando esto, cuando lo deje par funcionar con el postman y app,
+    if (!token || !token.startsWith('Bearer ')) {    //(SA)        -------> Si descomento esto cuando esto, cuando lo deje par funcionar con el postman y app,
         return res.status(401).json({ message: 'Fallo en la autenticación del token' });    //(SA)      ---------> va a parecer un mensaje de fallo en la
-    } */    //(SA)                                                          ---------> autenticación del token
+    }    //(SA)                                                          ---------> autenticación del token
 
     jwt.verify(token, JWT_SECRET, (err, decoded) => {
         if (err) {
@@ -20,10 +20,10 @@ export const verificarToken = (req, res, next) => {
         //req.user = { id: decoded.id }; // Asegúrate de que aquí esté el ID del usuario  //VALE CON LA APP Y CON POSTMAN
         next();
     });
-};
+}; */
 
 // middlewares/authJWT.js
-/* import jwt from 'jsonwebtoken';
+import jwt from 'jsonwebtoken';
 import { JWT_SECRET } from '../config.js'; // Asegúrate de que JWT_SECRET está correctamente importado
 
 export const verificarToken = (req, res, next) => {
@@ -49,4 +49,4 @@ export const verificarToken = (req, res, next) => {
     console.log('Usuario autenticado:', req.user);
     next();
   });
-}; */
+};
