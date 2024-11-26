@@ -7,9 +7,9 @@ export const verificarToken = (req, res, next) => {
     console.log('Authorization header:', token); // Depuración (SA)
     if (!token) return res.status(403).json({ message: 'Token no provisto' });
 
-    if (!token || !token.startsWith('Bearer ')) {    //(SA)
-        return res.status(401).json({ message: 'Fallo en la autenticación del token' });    //(SA)
-    }    //(SA)
+    if (!token || !token.startsWith('Bearer ')) {    //(SA)        -------> Si descomento esto cuando esto, cuando lo deje par funcionar con el postman y app,
+        return res.status(401).json({ message: 'Fallo en la autenticación del token' });    //(SA)      ---------> va a parecer un mensaje de fallo en la
+    }    //(SA)                                                          ---------> autenticación del token
 
     jwt.verify(token, JWT_SECRET, (err, decoded) => {
         if (err) {
