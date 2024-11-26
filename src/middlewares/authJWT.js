@@ -46,6 +46,7 @@ export const verificarToken = (req, res, next) => {
     }
     req.user = decoded;
     console.log('Usuario autenticado:', req.user);
+    console.log('Headers recibidos:', req.headers);
     next();
   });
 };
