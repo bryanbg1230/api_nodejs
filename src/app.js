@@ -16,6 +16,7 @@ const app=express();
 const corsOptions={
     origin:'*',//la direccion ip/dominio del servidor
     methods:['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
+    allowedHeaders: ['Authorization', 'Content-Type'], // Incluye 'Authorization'   (SA)
     credentials:true
 }
 
