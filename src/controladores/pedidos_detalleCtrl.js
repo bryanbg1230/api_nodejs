@@ -162,16 +162,21 @@ async(req,res)=>{
 
 export const deletePedidoPorPedidoID = async (req, res) => {
     try {
+        const usr_id = req.user?.id; // ID del usuario autenticado
+        if (!usr_id) {
+            return res.status(400).json({ message: "Usuario no autenticado" });
+        }
+
         const { id } = req.params; // Aquí recibimos el ped_id
-        
-        // Verificar si el pedido existe antes de intentar eliminar
+
+        // Verificar si el pedido pertenece al usuario autenticado
         const [pedidoExistente] = await conmysql.query(
-            'SELECT ped_id FROM pedidos WHERE ped_id = ?',
-            [id]
+            'SELECT ped_id FROM pedidos WHERE ped_id = ? AND usr_id = ?',
+            [id, usr_id]
         );
         
         if (pedidoExistente.length === 0) {
-            return res.status(404).json({ message: "Pedido no encontrado" });
+            return res.status(404).json({ message: "Pedido no encontrado o no pertenece al usuario" });
         }
         
         // Intentar eliminar detalles asociados (si existen)
@@ -195,3 +200,4 @@ export const deletePedidoPorPedidoID = async (req, res) => {
         res.status(500).json({ message: "Error del lado del servidor" });
     }
 };
+
